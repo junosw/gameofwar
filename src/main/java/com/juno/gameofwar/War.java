@@ -15,6 +15,7 @@ public class War {
     public static final int DEFAULT_NUM_RANKS = 13;
     public static final int DEFAULT_NUM_PLAYERS = 2;
 
+    public static final String PROGRAM_CMD = "java -jar build/libs/war-1.0.jar";
     public static final String SUITS_OPT = "s";
     public static final String SUITS_OPT_LONG = "suits";
     public static final String SUITS_OPT_NAME = "Suits";
@@ -96,7 +97,7 @@ public class War {
             if (cmd.hasOption(HELP_OPT)) {
                 HelpFormatter formatter = new HelpFormatter();
                 System.out.println("");
-                formatter.printHelp("java -jar build/lib/war-1.0.jar", options);
+                formatter.printHelp(PROGRAM_CMD, options);
                 System.out.println("");
                 return;
             }
