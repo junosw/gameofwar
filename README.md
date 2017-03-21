@@ -3,6 +3,8 @@ WAR! (the card game)
 
 This is a Java Gradle project that simulates the card game War with up to 600 players using up to 1,000,000 cards.
 
+The [Java runtime](https://www.java.com/en/download/help/download_options.xml) is required to build and run this project.
+
 Build and Test
 --------------
 <code>./gradlew clean build</code>
