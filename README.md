@@ -14,8 +14,8 @@ Run
 --------------
 To execute using the default number of players and cards, from the command line:
 
-<code>java -jar build/lib/war-1.0.jar</code>
+<code>java -jar build/libs/war-1.0.jar</code>
 
 To see the simulation run with a specified number of players and cards, you can use command line arguments. See the help for details:
 
-<code>java -jar build/lib/war-1.0.jar -help</code>
+<code>java -jar build/libs/war-1.0.jar -help</code>
