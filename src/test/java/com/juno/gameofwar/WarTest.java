@@ -31,6 +31,9 @@ public class WarTest {
 
     List<Player> players = new ArrayList<>(2);
 
+    /**
+     * Init some objects used in the following tests
+     */
     @Before
     public void setup() {
 
@@ -45,6 +48,9 @@ public class WarTest {
         players.add(p4);
     }
 
+    /**
+     * Test dealing with a known deck and players
+     */
     @Test
     public void testDealing() {
         WarDeck testDeck = new WarDeck();
@@ -95,11 +101,6 @@ public class WarTest {
     @Test (expected = InvalidParameterException.class)
     public void validPlayParamsTest() {
         war.play(1, 1, 10);
-    }
-
-    @Test
-    public void play() {
-        war.play(War.DEFAULT_NUM_SUITS, War.DEFAULT_NUM_RANKS, War.DEFAULT_NUM_PLAYERS);
     }
 
     /**
@@ -321,5 +322,36 @@ public class WarTest {
         final int expectedScore = 12;
 
         assertEquals(rr.getScore(), expectedScore);
+    }
+
+    /**
+     * Now actually play a game with a stacked deck and look for the expected result
+     */
+    @Test
+    public void playWar() {
+        TestDeck testDeck = new TestDeck();
+        testDeck.create(2, 3);
+
+        War war = new War(testDeck);
+
+        // because we initialized the War object with a deck, the SUITS and RANKS values
+        // won't actually be used - our deck that we've already created will
+        // the NUM_PLAYERS value WILL be used
+        // So we have 4 cards and two players
+        List<Player> winningPlayers =
+                war.play(GameOfWar.DEFAULT_NUM_SUITS, GameOfWar.DEFAULT_NUM_RANKS, GameOfWar.DEFAULT_NUM_PLAYERS);
+
+        // we know that the test deck is built like this:
+        // card1(0, 0), card2(0, 1), card3(0, 2), card4(1, 0), card5(1, 1), card6(1, 2)
+        // so then when it is dealt to two players in circular fashion, the player hands should look like:
+        // p1Hand = card1, card3, card5
+        // p2Hand = card2, card4, card6
+        // so playing this out, p2 wins 2 points in round 1, p1 wins 2 in round 2, p2 wins 2 in round 3
+        // p2 should win with 4 points
+        final int expectedNumberOfWinners = 1;
+        final int expectedWinnerId = 2;
+
+        assertEquals(winningPlayers.size(), expectedNumberOfWinners);
+        assertEquals(winningPlayers.get(0).getId(), expectedWinnerId);
     }
 }
